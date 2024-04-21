@@ -1,0 +1,32 @@
+DDL - 데이터 정의
+CREATE/ALTER/DROP
+정의, 수정, 삭제
+
+
+
+DML - 데이터 조작 *가장 중요함
+( INSERT, SELECT, UPDATE, DELETE ) -CRUD
+    
+DCL - 권한
+GRANT, ROVOKE
+
+
+[테이블 생성하기 - CREATE]
+- MEMBER TABLE 생성하기
+CREATE TABLE MEMBER
+(
+    ID  VARCHAR2(20),
+    ...
+);
+
+[컬럼 수정하기 - ALTER]
+ALTER TABLE MEMBER MODIFY ID NVARCHAR2(50);
+    형식 :  ALTER TABLE 수정할테이블 MODIFT 컬럼명 수정할내용
+
+[컬럼 삭제하기 - DROP]
+ALTER TABLE MEMBER DROP COLUMN AGE;
+    MEMBER 테이블에서 AGE 컬럼을 삭제하겠다
+
+[컬럼 추가하기 - ADD]
+ALTER TABLE MEMBER ADD EMAIL VARCHAR2(200);
+    EMAIL 컬럼 추가하겠다

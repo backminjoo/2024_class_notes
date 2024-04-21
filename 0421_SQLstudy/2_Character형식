@@ -1,0 +1,74 @@
+오라클 SQL 데이터 형식#1 (문자열 형식)
+
+오라클이 가지고 있는 기본 내장 형식
+( Oracle Built-in Data Types )
+-Character형식
+-Numeric 형식
+-Date 형식
+-LOB 형식
+
+[ Character(문자) 형식 ] : CHAR(3), VARCHAR2(3), NCHAR(3), NVARCHAR(3)
+1. CHAR[ (size [BYTE | CHAR ])]
+    - Character
+    - 기본 값은 바이트
+    - 고정 길이 문자 데이터
+    - 입력된 데이터의 크키와 무관하게 고정된 길이만큼 저장
+    - 저장 공간의 크기를 명시 ex) CHAR(10) *최소크기는 1BYTE
+        SELECT LENGTH('한글') FROM dual; // 길이 :2
+        SELECT LENGTHB('한글') FROM dual; // 6byte(한글 한글자당 3byte)
+
+2. VARCHAR2(size [BYTE | CHAR])
+    Variable Character
+    - 가변적인 크기 데이터에 적합함
+    - 실제 입력된 데이터의 크기만큼 저장 공간 차지
+    - 최대 크기를 명시 ex) VARCHAR2(100) *최소크키는 1BYTE
+    - 나머지 빈 공간은 반환함
+
+    - CHAR에 비해서 검색 속도가 느리다.
+    - 최대 4000BYTE
+
+
+3. NCHAR[(size)]
+    - National Character
+    - 전세계 언어의 문자들이 한번에 들어와야되는 경우 
+    GENDER CHAR(2, CHAR)
+    GENDER NCHAR(2) // 1번 선언보다 바람직한 데이터 타입과 바이트
+    
+
+4. NVARCHAR2(size)
+    - Nactional Variable Character
+    - 전세계적 언어
+    - 가변길이 데이터
+
+-- 큰 데이터를 다루는 경우
+5. LONG
+    - 2GB
+    - 주로 CLOB를 사용한다.
+    - 테이블 한 개의 컬럼만 생성 가능
+
+
+6. CLOB
+    - 대용량 텍스트 데이터 타입 (최대 4GB)
+    - LONG 을 보완한 타입
+
+
+7. NCLOB
+    - 대용량 텍스트 유니코드 데이터 타입(최대 4GB)
+
+
+    
+CREATE TABLE MEMBER
+{
+        ID      VARCHAR2(50),
+        PWD     NVARCHAR2(50),
+        NAME    NVARCHAR2(50),
+        --GENDER  CHAR(2 CHAR), -- 2글자라는 뜻, 남성 또는 여성 > 바람직하지 않음
+        GENDER NCHAR(2), 
+        AGE     NUMBER,
+        BIRTHDAY CHAR(10),  --2000-01-02 , 총 10개 문자
+        PHONE   CHAR(13), --010-1234-5678 , 총 13개 문자가 고정길이
+
+}
+
+*SELECT LENGTHB('ab') FROM DUAL; --영어는 한글자당 1BYTE
+ SELECT LENGTHB('한글') FORM DUAL; --한글은 한글자당 3BYTE
